@@ -1,0 +1,10 @@
+11056027043,John,Smith,17,johnnyboy@yahoo.com,python
+01073703642,Jane,Doe,18,janesgame@gmail.com,ruby
+11123434945,Peter,Pan,65,foreveryoung@neverland.com,ruby
+11020023335,Baby,Doe,17,bambi@outlook.com,c
+08081519855,Richard,Roe,33,richierichrich@dollar.no,c
+05075030136,Edgar,Poe,27,poet@deadlucky.no,java
+07056207850,Janie,Artie,44,janeartie@hotmail.com,php
+29092725837,Lizzy,Fizz,17,fizzer@gmail.com,python
+12043915779,Rene,Bear,50,grouch@yahoo.com,php
+17051630602,Catherine,Tabby,61,catlady@denial.com,python
