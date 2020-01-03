@@ -11,6 +11,7 @@ from EncodeDecodeClass import EncodeDecodeClass
 # TODO: StudentManagement
 #   TODO: enter_info()
 #   TODO: do_something_else()
+#   TODO: Custom exception?
 
 # TODO: StudentRecordClass
 #   TODO: DisplayAllStudents()
@@ -24,14 +25,22 @@ from EncodeDecodeClass import EncodeDecodeClass
 
 
 def enter_student_info():
-    # Querying user for student info, and converting to lowercase.
-    fodselsNummer, firstName, lastName, age, email, programmingCourse = \
-        input("Fodselsnummer: ").lower(), \
-        input("First name: ").lower(), \
-        input("Last name: ").lower(), \
-        input("Age: ").lower(), \
-        input("E-mail: ").lower(), \
-        input("Programming Course: ").lower()
+
+    # TODO: "You should also have more specific (and appropriate) handling for Value Errors. If the
+    # TODO: user inputs an incorrect value, they should be re-prompted for the correct value type
+    # TODO: and then the program should continue."
+
+    try:
+        # Querying user for student info, and converting to lowercase.
+        fodselsNummer, firstName, lastName, age, email, programmingCourse = \
+            input("Fodselsnummer: ").lower(), \
+            input("First name: ").lower(), \
+            input("Last name: ").lower(), \
+            input("Age: ").lower(), \
+            input("E-mail: ").lower(), \
+            input("Programming Course: ").lower()
+    except Exception("Oops something is buggy"):
+        print("Oops something is buggy")
 
     # Defining new student object from entered info.
     student_object = StudentRecordClass(fodselsNummer, firstName, lastName, age, email, programmingCourse)
@@ -61,7 +70,7 @@ if __name__ == "__main__":
     while True:
         try:
             # Ask for user input, conver to upper case.
-            user_input = input("Would you like to enter a student's information?" +
+            user_input = input("Would you like to enter a student's information? " +
                                "Type Y for Yes and N for No: ").upper()
 
         except Exception("Oops something is buggy"):
