@@ -1,7 +1,4 @@
 
-if __name__ == "__main__":
-    print(__name__)
-
 class StudentRecordClass:
 
     # This is the constructor for the class.
@@ -21,14 +18,17 @@ class StudentRecordClass:
         self.email = email
         self.programmingCourse = programmingCourse
 
-        # A method for this class. Can be called like this "objectName.displayName()".
-        def displayName():
-            # TODO: Need "self" as an argument, because instance is automatically
-            # TODO: passed as an argument whenever calling this method, and that would cause a
-            # TODO: mismatch between arguments passed and received?
-            print("Name:", firstName, lastName)
-            print("Name: {} {}".format(firstName, lastName))  # Is there any difference between these two?
-            # Is it better to access these variables via the instance ("self.firstName") or the class (firstName)?
+    # A method for this class. Can be called like this "objectName.displayName()".
+    def displayName(self):
+        # TODO: Need "self" as an argument, because instance is automatically
+        # TODO: passed as an argument whenever calling this method, and that would cause a
+        # TODO: mismatch between arguments passed and received?
+        print("Name:", self.firstName, self.lastName)
+        print("Name: {} {}".format(self.firstName, self.lastName))  # Is there any difference between these two?
+
+    def store(self):
+        print("Writing student information to Student Record File...")
+
 
 
 def DisplayAllStudents():

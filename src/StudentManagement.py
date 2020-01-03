@@ -7,6 +7,7 @@
 from StudentRecordClass import StudentRecordClass
 from EncodeDecodeClass import EncodeDecodeClass
 
+
 # TODO: StudentManagement
 #   TODO: enter_info()
 #   TODO: do_something_else()
@@ -22,8 +23,22 @@ from EncodeDecodeClass import EncodeDecodeClass
 #   TODO: DecodeStudentList()
 
 
-def enter_info():
-    print("Writing student information to Student Record File...")
+def enter_student_info():
+    # Querying user for student info, and converting to lowercase.
+    fodselsNummer, firstName, lastName, age, email, programmingCourse = \
+        input("Fodselsnummer: ").lower(), \
+        input("First name: ").lower(), \
+        input("Last name: ").lower(), \
+        input("Age: ").lower(), \
+        input("E-mail: ").lower(), \
+        input("Programming Course: ").lower()
+
+    # Defining new student object from entered info.
+    student_object = StudentRecordClass(fodselsNummer, firstName, lastName, age, email, programmingCourse)
+
+    # Storing student object into StudentRecords.txt file.
+    student_object.store()
+
     print("\n\n")
 
 
@@ -45,8 +60,10 @@ if __name__ == "__main__":
     # then that too is "not True or False", therefore the loop will run.
     while True:
         try:
-            # Ask for user input
-            user_input = input("Would you like to enter a student's information? Type Y for Yes and N for No: ")
+            # Ask for user input, conver to upper case.
+            user_input = input("Would you like to enter a student's information?" +
+                               "Type Y for Yes and N for No: ").upper()
+
         except Exception("Oops something is buggy"):
             # Task specifies to catch all exceptions like this, even though style guide
             # suggests "Too broad exception clause".
@@ -56,7 +73,7 @@ if __name__ == "__main__":
         entering_info = True if user_input == "Y" else False if user_input == "N" else None  # Ternary operator
 
         if entering_info:
-            enter_info()
+            enter_student_info()
             continue  # Continues the loop after running enter_info().
 
         elif entering_info is False:
