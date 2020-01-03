@@ -23,8 +23,8 @@ class StudentRecordClass:
         # TODO: Need "self" as an argument, because instance is automatically
         # TODO: passed as an argument whenever calling this method, and that would cause a
         # TODO: mismatch between arguments passed and received?
-        print("Name:", self.firstName, self.lastName)
-        print("Name: {} {}".format(self.firstName, self.lastName))  # Is there any difference between these two?
+        print("Name: {} {}".format(self.firstName, self.lastName))
+        # String in the code is easier to read when using the format() method.
 
     # Takes the student record object and returns the attribute values in a formatted string.
     def formatRecord(self):
@@ -41,7 +41,7 @@ class StudentRecordClass:
         return formattedStudentRecord
 
     # TODO: COMMENT
-    def store(self):
+    def addToFile(self):
         print("Writing student information to Student Record File...")
 
         # Opening the file with context manager.

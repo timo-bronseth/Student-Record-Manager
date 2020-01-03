@@ -9,19 +9,19 @@ from EncodeDecodeClass import EncodeDecodeClass
 
 
 # TODO: StudentManagement
-#   TODO: enter_info()
-#   TODO: do_something_else()
-#   TODO: Custom exception?
+# # DONE: enter_info()
+# # TODO: do_something_else()
+# # TODO: Custom exception?
 
 # TODO: StudentRecordClass
-#   TODO: DisplayAllStudents()
-#   TODO: DisplaySubjectClassList()
-#   TODO: DisplayOldest()
-#   TODO: DisplayYoungest()
+# # TODO: DisplayAllStudents()
+# # TODO: DisplaySubjectClassList()
+# # TODO: DisplayOldest()
+# # TODO: DisplayYoungest()
 
 # TODO: EncodeDecodeClass
-#   TODO: EncodeStudentList()
-#   TODO: DecodeStudentList()
+# # TODO: EncodeStudentList()
+# # TODO: DecodeStudentList()
 
 
 def enter_student_info():
@@ -45,14 +45,19 @@ def enter_student_info():
     # Defining new student object from entered info.
     student_object = StudentRecordClass(fodselsNummer, firstName, lastName, age, email, programmingCourse)
 
-    # Storing student object into StudentRecords.txt file.
-    student_object.store()
+    # Appends student object into StudentRecords.txt file.
+    student_object.addToFile()
 
     print("\n\n")
 
 
 def do_something_else():
-    print("N")
+    print("\n\n")
+    print("1. Would you like to see a list of all registered students?\n" +
+          "2. Would you like to see a class list for a specific subject?\n" +
+          "3. Would you like to see who your oldest student is?\n" +
+          "4. Would you like to see who your youngest student is?\n" +
+          "Enter a number for the selected task, or X to skip this: ")
     print("\n\n")
 
 
