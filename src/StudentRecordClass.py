@@ -26,9 +26,9 @@ class StudentRecordClass:
         print("Name:", self.firstName, self.lastName)
         print("Name: {} {}".format(self.firstName, self.lastName))  # Is there any difference between these two?
 
-    # Takes the object and returns the attribute values in a formatted string.
-    def format(self):
-        formattedStudentRecord = ""
+    # Takes the student record object and returns the attribute values in a formatted string.
+    def formatRecord(self):
+        formattedStudentRecord = "\n"  # Start the string with a newline.
 
         # Gets a dictionary representation of the object, and converts it to a list.
         values = list(self.__dict__.values())
@@ -36,7 +36,7 @@ class StudentRecordClass:
         # Iterates through the list, appending each value to the string, separated by a comma.
         for value in values[:-1]:
             formattedStudentRecord += value + ","
-        formattedStudentRecord += values[-1] + "\n"  # Adding the last item without ending on a comma.
+        formattedStudentRecord += values[-1]  # Adding the last item without ending on a comma.
 
         return formattedStudentRecord
 
@@ -47,10 +47,8 @@ class StudentRecordClass:
         # Opening the file with context manager.
         # This is cleaner and has superior functionality compared to just using file = open().
         # This creates file if it doesn't already exist.
-        with open('StudentRecords.txt', "a+") as studentRecords:
-            # Opening the file without specified mode, because we need to do several things with it.
-            studentRecords.write(self.format())
-            print(studentRecords.read())
+        with open('StudentRecords.txt', "a") as studentRecords:  # a for append mode.
+            studentRecords.write(self.formatRecord())  # formatRecord() is a method of the class.
         StudentRecordClass.num_students += 1  # Iterate the class variable.
 
 
