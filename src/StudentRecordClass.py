@@ -56,20 +56,20 @@ class StudentRecordClass:
 def getStudentObjects():
     student_objects = []  # Initialise the list.
 
-    with open('StudentRecords.txt', 'r') as studentRecords:  # Open in 'read' mode.
-        students_info = studentRecords.read()  # Gets the whole file as raw text.
-        students_info = students_info.splitlines()  # Converts the string to a list of all the lines in the text.
+    with open('StudentRecords.txt', 'r') as file:  # Open in 'read' mode.
+        student_records = file.read()  # Gets the whole file as raw text.
+        student_records = student_records.splitlines()  # Converts the string to a list of all the lines in the text.
 
-        for student_info in students_info:
+        for student_record in student_records:
 
-            # 'student_info' currently contains a string of info for a single student.
+            # 'student_record' currently contains a string of info for a single student.
             # .split makes a list out of each piece of info separated by a comma in the string.
-            student_info = student_info.split(',')
+            student_record = student_record.split(',')
 
-            # Makes a StudentRecordClass object based on student_info.
-            # '*student_info' is a quick way to unpack the list, to pass
+            # Makes a StudentRecordClass object based on student_record.
+            # '*student_record' is a quick way to unpack the list, to pass
             # each item as an argument into the function.
-            student_object = StudentRecordClass(*student_info)
+            student_object = StudentRecordClass(*student_record)
 
             # Appends the student_object to the list of student_objects.
             student_objects.append(student_object)
@@ -87,9 +87,11 @@ def displayAllStudents():
         student.displayName()
 
 
-def displaySubjectClassList():
-    print("displaySubjectClassList")
-    pass
+def displaySubjectClassList(subjectname):
+    # Parameter variable name is missing an underscore, but it's how it was specified in the assessment doc.
+
+    student_objects = getStudentObjects()
+
 
 
 def displayOldest():
