@@ -96,23 +96,18 @@ if __name__ == "__main__":
             user_input = input("Would you like to enter a student's information? " +
                                "Type Y for Yes and N for No: ").upper()
 
+            if user_input == "Y":
+                enterStudentInfo()
+                continue  # Continues the loop after running enterStudentInfo().
+
+            elif user_input == "N":
+                displayOptions()
+                break  # Breaks out of the loop if user types N.
+
+            else:
+                print("Please enter either Y or N.")
+
         except Exception("Oops something is buggy"):
             # Task specifies to catch all exceptions like this, even though style guide
             # suggests "Too broad exception clause".
             print("Oops something is buggy")
-
-        # Using a ternary operator to make the code cleaner. Idk how this affects speed.
-        entering_info = True if user_input == "Y" else False if user_input == "N" else None  # Ternary operator
-
-        if entering_info:
-            enterStudentInfo()
-            continue  # Continues the loop after running enter_info().
-
-        elif entering_info is False:
-            displayOptions()
-            break  # Breaks out of the loop if user types N.
-
-        # Only runs if Y or N is not typed.
-        # We do not need to wrap the following line in an else clause, so we can save on
-        # execution time by omitting it.
-        print("Please enter either Y or N.")
