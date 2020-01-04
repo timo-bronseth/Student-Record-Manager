@@ -1,4 +1,4 @@
-# noinspection PyPep8Naming
+#
 class EncodeDecodeClass:
     pass
 
