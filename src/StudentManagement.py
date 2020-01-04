@@ -4,17 +4,21 @@
 #
 # Timo Brønseth, January 2020
 # -------------------------------------------------------------------------------------
-from StudentRecordClass import StudentRecordClass
+from StudentRecordClass import StudentRecordClass, \
+    displayAllStudents, \
+    displaySubjectClassList, \
+    displayOldest, \
+    displayYoungest
 from EncodeDecodeClass import EncodeDecodeClass
 
 
 # TODO: StudentManagement
 # # DONE: enter_info()
-# # TODO: do_something_else()
+# # DONE: displayOptions()
 # # TODO: Custom exception?
 
 # TODO: StudentRecordClass
-# # TODO: DisplayAllStudents()
+# # DONE: DisplayAllStudents()
 # # TODO: DisplaySubjectClassList()
 # # TODO: DisplayOldest()
 # # TODO: DisplayYoungest()
@@ -24,8 +28,7 @@ from EncodeDecodeClass import EncodeDecodeClass
 # # TODO: DecodeStudentList()
 
 
-def enter_student_info():
-
+def enterStudentInfo():
     # TODO: "You should also have more specific (and appropriate) handling for Value Errors. If the
     # TODO: user inputs an incorrect value, they should be re-prompted for the correct value type
     # TODO: and then the program should continue."
@@ -51,30 +54,45 @@ def enter_student_info():
     print("\n\n")
 
 
-def do_something_else():
-    print("\n\n")
-    print("1. Would you like to see a list of all registered students?\n" +
-          "2. Would you like to see a class list for a specific subject?\n" +
-          "3. Would you like to see who your oldest student is?\n" +
-          "4. Would you like to see who your youngest student is?\n" +
-          "Enter a number for the selected task, or X to skip this: ")
-    print("\n\n")
+def displayOptions():
+    try:
+        # Ask for user input.
+        user_input = input("\n" +
+                           "1. Would you like to see a list of all registered students?\n" +
+                           "2. Would you like to see a class list for a specific subject?\n" +
+                           "3. Would you like to see who your oldest student is?\n" +
+                           "4. Would you like to see who your youngest student is?\n" +
+                           "Enter a number for the selected task, or X to skip this: ")
+
+    except Exception("Oops something is buggy"):
+        # Task specifies to catch all exceptions like this, even though style guide
+        # suggests "Too broad exception clause".
+        print("Oops something is buggy")
+
+    # Check if user_input points to either of the options, and recursively call
+    # the displayOptions() function until user_input has an actionable value.
+    if user_input not in ["1", "2", "3", "4", "X", "x"]:
+        print("\nPlease select either 1, 2, 3, 4 or X.")
+        displayOptions()
+
+    # Execute functions depending on the value of user_input.
+    if user_input == "1":
+        displayAllStudents()
+    elif user_input == "2":
+        displaySubjectClassList()
+    elif user_input == "3":
+        displayOldest()
+    elif user_input == "4":
+        displayYoungest()
+    elif user_input.upper() == "X":
+        print("X")
 
 
 if __name__ == "__main__":
 
-    # This is very neat and all, but not very functional.
-    # # Runs query_user() until it returns something other than None.
-    # while welcome_query() is None:
-    #     print("Please enter either Y or N.")
-    #     continue
-
-    # The advantage of this formulation is that we do not need to define "entering_info"
-    # before we use it as a condition for the while loop. If entering_info is undefined,
-    # then that too is "not True or False", therefore the loop will run.
     while True:
         try:
-            # Ask for user input, conver to upper case.
+            # Ask for user input, convert to upper case.
             user_input = input("Would you like to enter a student's information? " +
                                "Type Y for Yes and N for No: ").upper()
 
@@ -87,11 +105,11 @@ if __name__ == "__main__":
         entering_info = True if user_input == "Y" else False if user_input == "N" else None  # Ternary operator
 
         if entering_info:
-            enter_student_info()
+            enterStudentInfo()
             continue  # Continues the loop after running enter_info().
 
         elif entering_info is False:
-            do_something_else()
+            displayOptions()
             break  # Breaks out of the loop if user types N.
 
         # Only runs if Y or N is not typed.
