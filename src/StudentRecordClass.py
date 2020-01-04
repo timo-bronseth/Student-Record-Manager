@@ -80,6 +80,7 @@ def getStudentObjects():
 def displayAllStudents():
     # Style guide suggests functions should be snake case instead of CamelCase contrary to task specification.
 
+    # Get a list of all student objects.
     student_objects = getStudentObjects()
 
     print("\nThe students registered are:")
@@ -90,15 +91,70 @@ def displayAllStudents():
 def displaySubjectClassList(subjectname):
     # Parameter variable name is missing an underscore, but it's how it was specified in the assessment doc.
 
+    # Get a list of all student objects.
     student_objects = getStudentObjects()
 
+    # Filtering the list based on programming course using list comprehension.
+    subject_takers = [student for student in student_objects if student.programmingCourse == subjectname.lower()]
+
+    # Prints the names of students that take the specified programming course.
+    print("\nThe students registered for {} are:".format(subjectname))
+    for student in subject_takers:
+        student.displayName()
 
 
 def displayOldest():
-    print("displayOldest")
-    pass
+
+    # Get a list of all student objects.
+    student_objects = getStudentObjects()
+
+    # Find the age of the oldest student(s)
+    for i, student in enumerate(student_objects):
+        student_age = int(student.age)  # Convert from str to int.
+
+        # If student_age is larger than oldest_age, sets oldest_age to it.
+        # But oldest_age is not defined for the first iteration, so condition
+        # is also fulfilled if it's the first iteration (i.e. i == 0).
+        if i == 0 or student_age > oldest_age:
+            oldest_age = student_age
+
+    # Searches through the student list, and adds all the students with the oldest age to a string.
+    oldest_students = ""
+    for student in student_objects:
+        if int(student.age) == oldest_age:
+            oldest_students += "{} {}, ".format(student.firstName.capitalize(), student.lastName.capitalize())
+    oldest_students = oldest_students[:-2]  # Remove ", " at the end of the string.
+
+    # Print results
+    print("\nThe eldest student(s) is/are {}. They are {}."
+          .format(oldest_students, oldest_age))
 
 
 def displayYoungest():
-    print("displayYoungest")
-    pass
+    # Get a list of all student objects.
+    student_objects = getStudentObjects()
+
+    # Find the age of the oldest student(s)
+    # youngest_age = 999  # Start from 999, and search downward.
+    for student in student_objects:
+        student_age = int(student.age)  # Convert from str to int.
+
+        # Does the same thing as in displayOldest(), except this time condition
+        # tests to see if variable is undefined by trying to run the code, and
+        # defining youngest_age if it is not already defined.
+        try:
+            if student_age < youngest_age:
+                youngest_age = student_age
+        except NameError:  # Catches a NameError if a variable is not defined.
+            youngest_age = student_age
+
+    # Searches through the student list, and adds all the students with the youngest age to a string.
+    youngest_students = ""
+    for student in student_objects:
+        if int(student.age) == youngest_age:
+            youngest_students += "{} {}, ".format(student.firstName.capitalize(), student.lastName.capitalize())
+    youngest_students = youngest_students[:-2]  # Remove ", " at the end of the string.
+
+    # Print results
+    print("\nThe youngest student(s) is/are {}. They are {}."
+          .format(youngest_students, youngest_age))
