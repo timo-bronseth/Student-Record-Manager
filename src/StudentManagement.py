@@ -126,7 +126,7 @@ def EncryptOption():
             EncryptOption()
 
         elif userInput == "Y":
-            crypto.EncodeStudentList()
+            crypto.EncodeStudentList('StudentRecords.txt', 5)
 
         elif userInput == "N":
             DecryptOption()
@@ -144,7 +144,7 @@ def DecryptOption():
             DecryptOption()
 
         elif userInput == "Y":
-            crypto.DecodeStudentList()
+            crypto.DecodeStudentList('EncryptedRecords.txt', -5)
 
         elif userInput == "N":
             print("\nThe assessment is over. Have a nice day.")
