@@ -5,9 +5,12 @@ import string
 
 
 def _SwapNumCipher(cipherText: str):
-    """For internal use."""
+    """Swaps the first and last digits of any numbers found in the string.
 
-    # cipherText = cipherText.split(',')
+    For internal use. Symmetric: can be used to encrypt and decrypt."""
+
+    # Extracts items into a list from the string separated by commas.
+    cipherText = cipherText.split(',')
 
     print(cipherText)
 
@@ -52,7 +55,9 @@ class EncodeDecodeClass:
         """Takes a plaintext, encrypts it, and returns a ciphertext.
 
         It uses a Ceasar Cipher, which works by shifting each letter in the text n letters forward
-        in the alphabet. It also changes numbers by swapping the last and first digits."""
+        in the alphabet. It also changes numbers by swapping the last and first digits.
+
+        It is bidirectional, so can be used to encrypt and decrypt (with negative numShifts)."""
 
         # cipherText starts out as a plaintext list, and then gets encrypted.
         cipherText = list(plainText)  # Converts string to a list of characters.
