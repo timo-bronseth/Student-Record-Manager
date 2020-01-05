@@ -1,22 +1,24 @@
 # -------------------------------------------------------------------------------------
-# Takes student information as input (fodselsNummer, firstName, lastName, age, email, programmingCourse)
-# and stores it in a structured records file. The file should be searchable.
+# This program provides an interface that allows the user to access and add to a
+# student records database. It also allows the user to encrypt and decrypt the file.
+#
+# This StudentManagement.py file in particular deals with everything that has to do
+# with querying the user, and calling the corresponding functions from other .py files.
+#
+# A note on code style: Assessment document says to use their function and variable
+# names, but it uses CamelCase for function and variable names. This goes against both
+# PEP8 and Google Style Guide. Seems weird, but I decided to conform to it with all the
+# functions and variables I write in order to stay consistent.
 #
 # Timo Brønseth, January 2020
 # -------------------------------------------------------------------------------------
-from StudentRecordClass import StudentRecordClass, \
-    displayAllStudents, \
-    displaySubjectClassList, \
-    displayOldest, \
-    displayYoungest
-from EncodeDecodeClass import EncodeDecodeClass
-import textwrap
+from StudentRecordClass import StudentRecordClass as database
+from EncodeDecodeClass import EncodeDecodeClass as crypto
+from textwrap import dedent
 
-
-# TODO: StudentManagement
+# DONE: StudentManagement
 # # DONE: enter_info()
-# # DONE: displayOptions()
-# # TODO: Custom exception?
+# # DONE: DisplayOptions()
 
 # DONE: StudentRecordClass
 # # DONE: DisplayAllStudents()
@@ -29,58 +31,59 @@ import textwrap
 # # TODO: DecodeStudentList()
 
 # TODO: Make all function and variable names have consistent style (CamelCase)
+# TODO: Use triple-quotes for commenting functions.
 
-def enterStudentInfo():
-    # TODO: "You should also have more specific (and appropriate) handling for Value Errors. If the
-    # TODO: user inputs an incorrect value, they should be re-prompted for the correct value type
-    # TODO: and then the program should continue."
 
+def EnterStudentInfo():
     try:
         # Querying user for student info, and converting to lowercase.
         fodselsNummer, firstName, lastName, age, email, programmingCourse = \
-            input("Fodselsnummer: ").lower(), \
+            input("\nFodselsnummer: ").lower(), \
             input("First name: ").lower(), \
             input("Last name: ").lower(), \
             input("Age: ").lower(), \
             input("E-mail: ").lower(), \
             input("Programming Course: ").lower()
+
     except Exception("Oops something is buggy"):
-        print("Oops something is buggy")
+        print("\nOops something is buggy")
 
     # Defining new student object from entered info.
-    student_object = StudentRecordClass(fodselsNummer, firstName, lastName, age, email, programmingCourse)
+    studentObject = database(fodselsNummer, firstName, lastName, age, email, programmingCourse)
 
     # Appends student object into StudentRecords.txt file.
-    student_object.addToFile()
+    studentObject.addToFile()
 
 
 # Queries the user for which programming course to display students from.
 # It's very short, but I think it seems cleaner to have it here.
-def getSubjectName():
-    programming_courses = ["Python", "Java", "C", "Php", "Ruby"]
+def GetSubjectName():
+    programmingCourses = ["Python", "Java", "C", "Php", "Ruby"]
 
     try:
         # Capitalize() to convert to "Python" in case they write "python".
         subjectname = input("\nSpecify programming course: ").capitalize()
 
-        if subjectname not in programming_courses:
-            print("We do not offer that course.\nPlease specify one of {}."
-                  .format(str(programming_courses).strip('[]')))
-            getSubjectName()
+        if subjectname not in programmingCourses:
+            print("\nWe do not offer that course.\nPlease specify one of {}."
+                  .format(str(programmingCourses).strip('[]')))
+            GetSubjectName()
 
     except Exception("Oops something is buggy"):
         # Task specifies to catch all exceptions like this, even though style guide
         # suggests "Too broad exception clause".
-        print("Oops something is buggy")
+        print("\nOops something is buggy")
 
     return subjectname
 
 
-def displayOptions():
+def DisplayOptions():
+    """Queries the user on"""
+
     try:
         # Ask for user input.
         # textwrap.dedent() removes the indentations from the string.
-        user_input = input(textwrap.dedent("""
+        userInput = input(dedent("""
                                               1. Would you like to see a list of all registered students?
                                               2. Would you like to see a class list for a specific subject?
                                               3. Would you like to see who your oldest student is?
@@ -90,48 +93,86 @@ def displayOptions():
     except Exception("Oops something is buggy"):
         # Task specifies to catch all exceptions like this, even though style guide
         # suggests "Too broad exception clause".
-        print("Oops something is buggy")
+        print("\nOops something is buggy")
 
-    # Check if user_input points to either of the options, and recursively call
-    # the displayOptions() function until user_input has an actionable value.
-    if user_input not in ["1", "2", "3", "4", "X", "x"]:
+    # Check if userInput points to either of the options, and recursively call
+    # the DisplayOptions() function until userInput has an actionable value.
+    if userInput not in ["1", "2", "3", "4", "X", "x"]:
         print("\nPlease select either 1, 2, 3, 4 or X.")
-        displayOptions()
+        DisplayOptions()
 
-    # Execute functions depending on the value of user_input.
-    if user_input == "1":
-        displayAllStudents()
-    elif user_input == "2":
-        displaySubjectClassList(getSubjectName())  # Get subject name first.
-    elif user_input == "3":
-        displayOldest()
-    elif user_input == "4":
-        displayYoungest()
-    elif user_input.upper() == "X":
-        print("X")
+    # Execute functions depending on the value of userInput.
+    elif userInput == "1":
+        database.DisplayAllStudents()
+    elif userInput == "2":
+        database.displaySubjectClassList(GetSubjectName())  # Get subject name first.
+    elif userInput == "3":
+        database.DisplayOldest()
+    elif userInput == "4":
+        database.DisplayYoungest()
+    elif userInput.upper() == "X":
+        EncryptOption()
 
 
-# Main entry point for the program.
+def EncryptOption():
+    """Queries the user about encrypting the student records file."""
+
+    try:
+        userInput = input("\nWould you like to encode a copy of the student records? Type Y for Yes or N for No: ")\
+                     .upper()
+
+        if userInput not in ["Y", "N"]:
+            print("\nPlease select either Y or N.")
+            EncryptOption()
+
+        elif userInput == "Y":
+            crypto.EncodeStudentList()
+
+        elif userInput == "N":
+            DecryptOption()
+
+    except Exception("Oops something is buggy"):
+        print("\nOops something is buggy")
+
+
+def DecryptOption():
+    try:
+        userInput = input("\nWould you like to decode the encoded file? Y/N: ").upper()
+
+        if userInput not in ["Y", "N"]:
+            print("\nPlease select either Y or N.")
+            DecryptOption()
+
+        elif userInput == "Y":
+            crypto.DecodeStudentList()
+
+        elif userInput == "N":
+            print("\nThe assessment is over. Have a nice day.")
+
+    except Exception("Oops something is buggy"):
+        print("\nOops something is buggy")
+
+
+# Main entry point for the program. Only executes if this .py file is run.
 if __name__ == "__main__":
-
     while True:
         try:
             # Ask for user input, convert to upper case.
-            user_input = input("Would you like to enter a student's information? " +
+            userInput = input("\nWould you like to enter a student's information? " +
                                "Type Y for Yes and N for No: ").upper()
 
-            if user_input == "Y":
-                enterStudentInfo()
-                continue  # Continues the loop after running enterStudentInfo().
+            if userInput == "Y":
+                EnterStudentInfo()
+                continue  # Continues the loop after running EnterStudentInfo().
 
-            elif user_input == "N":
-                displayOptions()
+            elif userInput == "N":
+                DisplayOptions()
                 break  # Breaks out of the loop if user types N.
 
             else:
-                print("Please enter either Y or N.")
+                print("\nPlease select either Y or N.")
 
         except Exception("Oops something is buggy"):
             # Task specifies to catch all exceptions like this, even though style guide
             # suggests "Too broad exception clause".
-            print("Oops something is buggy")
+            print("\nOops something is buggy")
