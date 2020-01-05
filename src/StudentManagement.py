@@ -10,7 +10,7 @@
 # PEP8 and Google Style Guide. Seems weird, but I decided to conform to it with all the
 # functions and variables I write in order to stay consistent.
 #
-# Timo Brønseth, January 2020
+# Timo Brønseth, January 2020.
 # -------------------------------------------------------------------------------------
 from StudentRecordClass import StudentRecordClass as database
 from EncodeDecodeClass import EncodeDecodeClass as crypto
