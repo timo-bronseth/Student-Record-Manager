@@ -96,10 +96,9 @@ class StudentRecordClass:
             student.DisplayName()
 
     @staticmethod
+    # Parameter variable name is missing an underscore, but it's how it was specified in the assessment doc.
     def displaySubjectClassList(subjectname):
         """Accessor"""
-
-        # Parameter variable name is missing an underscore, but it's how it was specified in the assessment doc.
 
         # Get a list of all student objects.
         studentObjects = _GetStudentObjects()
@@ -147,8 +146,7 @@ class StudentRecordClass:
         # Get a list of all student objects.
         studentObjects = _GetStudentObjects()
 
-        # Find the age of the oldest student(s)
-        # youngestAge = 999  # Start from 999, and search downward.
+        # Find the age of the youngest student(s)
         for student in studentObjects:
             studentAge = int(student.age)  # Convert from str to int.
 
