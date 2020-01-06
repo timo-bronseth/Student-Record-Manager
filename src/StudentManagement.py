@@ -39,8 +39,8 @@ def EnterStudentInfo():
         # Querying user for student info, and converting to lowercase.
         fodselsNummer, firstName, lastName, age, email, programmingCourse = \
             input("\nFodselsnummer: ").lower(), \
-            input("First name: ").lower(), \
-            input("Last name: ").lower(), \
+            input("First name: ").capitalize(), \
+            input("Last name: ").capitalize(), \
             input("Age: ").lower(), \
             input("E-mail: ").lower(), \
             input("Programming Course: ").lower()

@@ -4,6 +4,34 @@
 import string
 
 
+def _CapitalizeNames(studentRecords: str) -> str:
+    """Takes studentRecords text, and capitalises
+    the 2nd and 3rd items on each line.
+
+    For internal use."""
+
+    # Get list of lines in studentRecords.
+    studentRecordsLines = studentRecords.split('\n')  # studentRecordsLines is a list of strings.
+
+    # Iterate over all lines.
+    for i, line in enumerate(studentRecordsLines):
+
+        # Get list of items in line.
+        lineItems = line.split(',')  # lineItems is a list of strings.
+
+        # Capitalize the 2nd and 3rd items in the list.
+        lineItems[1] = lineItems[1].capitalize()
+        lineItems[2] = lineItems[2].capitalize()
+
+        # Insert the line back into studentRecordsLines as a string.
+        studentRecordsLines[i] = ",".join(lineItems)
+
+    # Insert the studentRecordsLines back into studentRecords as a string.
+    studentRecords = "\n".join(studentRecordsLines)
+
+    return studentRecords
+
+
 def _SwapDigits(cipherText: str) -> str:  # Using type hints to show that both arg and return val should be string.
     """Swaps the first and last digits of any numbers found in the string.
 
@@ -128,6 +156,9 @@ class EncodeDecodeClass:
 
         # Applies the SwapDigits cipher, swapping the first and last digit for each number in the text.
         cipherText = _SwapDigits(cipherText)
+
+        # Capitalizes names in the text.
+        cipherText = _CapitalizeNames(cipherText)
 
         return cipherText
 
