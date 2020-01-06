@@ -111,7 +111,7 @@ class ExceptionHandlingClass:
         except ValueError:
             # Reprompt user for valid entry.
             print(errorPrompt)
-            cls.QueryStr(queryString, errorPrompt, conditionList)
+            cls.QueryStrGeneral(queryString, errorPrompt, conditionList)
 
         except Exception:
             print("\nOops something is buggy")
