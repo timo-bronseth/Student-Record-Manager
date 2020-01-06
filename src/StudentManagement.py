@@ -81,9 +81,11 @@ def EncryptOption():
     conditionList = ["Y", "N"]
     userInput = ExceptionHandling.QueryStrGeneral(queryString, errorPrompt, conditionList)
 
+    # If Y, then call EncodeStudentList from the EncodeDecodeClass (as 'Crypto' here).
     if userInput == "Y":
         Crypto.EncodeStudentList('StudentRecords.txt', 5)
 
+    # If N, then call DecryptOption().
     elif userInput == "N":
         DecryptOption()
 
@@ -97,9 +99,11 @@ def DecryptOption():
     conditionList = ["Y", "N"]
     userInput = ExceptionHandling.QueryStrGeneral(queryString, errorPrompt, conditionList)
 
+    # If Y, then call DecodeStudentList from the EncodeDecodeClass (as 'Crypto' here).
     if userInput == "Y":
         Crypto.DecodeStudentList('EncryptedRecords.txt', -5)
 
+    # If N, then end the program.
     elif userInput == "N":
         print("\nThe assessment is over. Have a nice day.")
 

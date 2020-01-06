@@ -15,7 +15,8 @@ class ExceptionHandlingClass:
 
     @classmethod
     def QueryInt(cls, varName: str) -> str:
-        """docstring"""
+        """Queries the user for an integer, and recursively calls itself
+        until user has successfully entered an integer."""
 
         # userInput needs to be raised to global so that it can be updated
         # while recursively calling this function in the except clause.
@@ -45,7 +46,8 @@ class ExceptionHandlingClass:
 
     @classmethod
     def QueryStr(cls, varName: str) -> str:
-        """docstring"""
+        """Queries the user for a string, and recursively calls itself
+        until user has successfully entered an string."""
 
         global userInput
 
@@ -68,7 +70,8 @@ class ExceptionHandlingClass:
 
     @classmethod
     def QueryCourse(cls, varName: str) -> str:
-        """docstring"""
+        """Queries the user for a programming course string, and recursively
+        calls itself until user has successfully entered such."""
 
         global userInput
         _programmingCourses = ["python", "java", "c", "php", "ruby"]
@@ -93,7 +96,7 @@ class ExceptionHandlingClass:
 
     @classmethod
     def QueryStrGeneral(cls, queryString: str, errorPrompt: str, conditionList: list) -> str:
-        """docstring"""
+        """A more general version, with more arguments, to query user for a string."""
 
         global userInput
 
