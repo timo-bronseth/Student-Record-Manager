@@ -5,8 +5,8 @@ import string
 
 
 def _CapitalizeNames(studentRecords: str) -> str:
-    """Takes studentRecords text, and capitalises
-    the 2nd and 3rd items on each line.
+    """Takes studentRecords text, and capitalises the 2nd and 3rd
+    items (containing first and last names) on each line.
 
     For internal use."""
 
@@ -161,7 +161,3 @@ class EncodeDecodeClass:
         cipherText = _CapitalizeNames(cipherText)
 
         return cipherText
-
-    # @staticmethod
-    # Using the @staticmethod decorator and including this function inside the class,
-    # because the function purpose is closely associated with the rest of the class.

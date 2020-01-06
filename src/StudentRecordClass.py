@@ -52,7 +52,7 @@ class StudentRecordClass:
 
     # A method for this class. Can be called like this "objectName.DisplayName()".
     def DisplayName(self):
-        """Prints the name variables from the student instance object."""
+        """Accessor method. Prints the name variables from the student instance object."""
 
         print("{} {}".format(self.firstName.capitalize(), self.lastName.capitalize()))
 
@@ -72,7 +72,7 @@ class StudentRecordClass:
         return formattedStudentRecord
 
     def addToFile(self):
-        """Mutator"""
+        """Mutator method. Writes a formatted record into the StudentRecords.txt file."""
 
         print("\nWriting student information to Student Record File...")
 
@@ -87,9 +87,7 @@ class StudentRecordClass:
     # should not automatically be passed an object instance (i.e. "self") as the first argument.
     # I'm using it because then I can include these functions inside the class.
     def DisplayAllStudents():
-        """Accessor"""
-
-        # Style guide suggests functions should be snake case instead of CamelCase contrary to task specification.
+        """Accessor method. Loops through list of student objects and calls DisplayName() on them."""
 
         # Get a list of all student objects.
         studentObjects = _GetStudentObjects()
@@ -100,23 +98,24 @@ class StudentRecordClass:
 
     @staticmethod
     # Parameter variable name is missing an underscore, but it's how it was specified in the assessment doc.
-    def displaySubjectClassList(subjectname):
-        """Accessor"""
+    def DisplaySubjectClassList(subjectname):
+        """Accessor method. Prints all the students who currently take a specific programming course."""
 
+        print("DisplaySubject {}.".format(subjectname))
         # Get a list of all student objects.
         studentObjects = _GetStudentObjects()
 
         # Filtering the list based on programming course using list comprehension.
-        subjectTakers = [student for student in studentObjects if student.programmingCourse == subjectname.lower()]
+        subjectTakers = [student for student in studentObjects if student.programmingCourse == subjectname]
 
         # Prints the names of students that take the specified programming course.
-        print("\nThe students registered for {} are:".format(subjectname))
+        print("\nThe students registered for {} are:".format(subjectname.capitalize()))
         for student in subjectTakers:
             student.DisplayName()
 
     @staticmethod
     def DisplayOldest():
-        """Accessor"""
+        """Accessor method. Displays oldest student(s)."""
 
         # Get a list of all student objects.
         studentObjects = _GetStudentObjects()
@@ -144,7 +143,7 @@ class StudentRecordClass:
 
     @staticmethod
     def DisplayYoungest():
-        """Accessor"""
+        """Accessor method. Displays the youngest student(s)."""
 
         # Get a list of all student objects.
         studentObjects = _GetStudentObjects()
