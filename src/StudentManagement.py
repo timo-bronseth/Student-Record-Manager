@@ -30,7 +30,7 @@ def EnterStudentInfo():
     lastName = ExceptionHandling.QueryStr("last name").capitalize()
     age = ExceptionHandling.QueryInt("age")
     email = ExceptionHandling.QueryStr("email").lower()
-    programmingCourse = GetSubjectName()
+    programmingCourse = ExceptionHandling.QueryCourse("programming course").lower()
 
     # Defining new student object from entered info.
     studentObject = Database(fodselsNummer, firstName, lastName, age, email, programmingCourse)
@@ -42,16 +42,9 @@ def EnterStudentInfo():
     Main()
 
 
-# Queries the user for which programming course to display students from.
-def GetSubjectName():
-    """"""
-
-    subjectname = ExceptionHandling.QueryCourse("programming course").lower()
-    return subjectname
-
-
 def DisplayOptions():
-    """Queries the user on"""
+    """Provides the user the option of using several accessor methods to display information
+    from the database."""
 
     # Ask for user input via the ErrorHandling method.
     # textwrap.dedent() removes the indentations from the string.
@@ -69,7 +62,8 @@ def DisplayOptions():
     if userInput == "1":
         Database.DisplayAllStudents()
     elif userInput == "2":
-        Database.DisplaySubjectClassList(GetSubjectName())  # Get subject name first.
+        subjectname = ExceptionHandling.QueryCourse("programming course").lower()
+        Database.DisplaySubjectClassList(subjectname)  # Get subject name first.
     elif userInput == "3":
         Database.DisplayOldest()
     elif userInput == "4":
@@ -82,8 +76,7 @@ def EncryptOption():
     """Queries the user about encrypting the student records file."""
 
     # Ask for user input via the ErrorHandling method.
-    queryString = "\nWould you like to encode a copy of the student records? Type Y for Yes or N for No: "\
-                     .upper()
+    queryString = "\nWould you like to encode a copy of the student records? Type Y for Yes or N for No: "
     errorPrompt = "\nPlease select either Y or N."
     conditionList = ["Y", "N"]
     userInput = ExceptionHandling.QueryStrGeneral(queryString, errorPrompt, conditionList)
@@ -96,7 +89,7 @@ def EncryptOption():
 
 
 def DecryptOption():
-    """"""
+    """Provides to the user the option to decode the encrypted records."""
 
     # Ask for user input via the ErrorHandling method.
     queryString = "\nWould you like to decode the encoded file? Y/N: "
@@ -115,8 +108,8 @@ def Main():
     """Main function for the Student Record Manager program."""
 
     # Ask for user input via the ErrorHandling method.
-    queryString = "\nWould you like to enter a student's information? " +\
-                           "Type Y for Yes and N for No: "
+    queryString = "\nWould you like to enter a student's information? " + \
+                  "Type Y for Yes and N for No: "
     errorPrompt = "\nPlease select either Y or N."
     conditionList = ["Y", "N"]
     userInput = ExceptionHandling.QueryStrGeneral(queryString, errorPrompt, conditionList)

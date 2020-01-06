@@ -101,7 +101,6 @@ class StudentRecordClass:
     def DisplaySubjectClassList(subjectname):
         """Accessor method. Prints all the students who currently take a specific programming course."""
 
-        print("DisplaySubject {}.".format(subjectname))
         # Get a list of all student objects.
         studentObjects = _GetStudentObjects()
 
