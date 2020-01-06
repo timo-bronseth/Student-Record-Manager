@@ -4,7 +4,7 @@
 import string
 
 
-def _CapitalizeNames(studentRecords: str) -> str:
+def _CapitalizeNames(studentRecords: str) -> str:  # Type hints to show that both arg and return val should be strings.
     """Takes studentRecords text, and capitalises the 2nd and 3rd
     items (containing first and last names) on each line.
 
@@ -32,7 +32,7 @@ def _CapitalizeNames(studentRecords: str) -> str:
     return studentRecords
 
 
-def _SwapDigits(cipherText: str) -> str:  # Using type hints to show that both arg and return val should be string.
+def _SwapDigits(cipherText: str) -> str:  # Type hints to show that both arg and return val should be strings.
     """Swaps the first and last digits of any numbers found in the string.
 
     For internal use.
